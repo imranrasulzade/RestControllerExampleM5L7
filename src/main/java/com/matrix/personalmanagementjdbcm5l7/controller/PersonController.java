@@ -1,6 +1,7 @@
 package com.matrix.personalmanagementjdbcm5l7.controller;
 
-import com.matrix.personalmanagementjdbcm5l7.utilty.PersonRepository;
+import com.matrix.personalmanagementjdbcm5l7.service.PersonService;
+import com.matrix.personalmanagementjdbcm5l7.service.PersonalService;
 import com.matrix.personalmanagementjdbcm5l7.model.Person;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -9,19 +10,25 @@ import java.util.List;
 @RequestMapping("/personal")
 public class PersonController {
 
+    private PersonalService personalService;
+
+    public PersonController(PersonalService personalService){
+        this.personalService = personalService;
+    }
+
     @GetMapping("/select")
     public String selectPersonById(@RequestParam(name = "id") int id){
-       return PersonRepository.selectPersonById(id);
+       return personalService.selectPersonById(id);
     }
 
     @GetMapping("/selectAll")
     public List<Person> selectAll(){
-        return PersonRepository.selectAll();
+        return personalService.selectAll();
     }
 
     @PostMapping("/")
     public String setPerson(@RequestBody Person person){
-        if(PersonRepository.setPerson(person))
+        if(personalService.setPerson(person))
             return "1 row successfully ADDED ✅";
         else
             return "Unsuccessfully adding process!!!";
@@ -29,7 +36,7 @@ public class PersonController {
 
     @PutMapping("/")
     public String updatePerson(@RequestBody Person person){
-        if(PersonRepository.updatePerson(person))
+        if(personalService.updatePerson(person))
             return "1 row successfully UPDATED ✅";
         else
             return "Unsuccessfully updating process!!!";
@@ -37,7 +44,7 @@ public class PersonController {
 
     @DeleteMapping("/delete")
     public String deletePerson(@RequestBody Person person){
-        if(PersonRepository.deletePerson(person.getId()))
+        if(personalService.deletePerson(person.getId()))
             return "1 row DELETED successfully ✅";
         else
             return "Unsuccessfully deleting process!!!";
