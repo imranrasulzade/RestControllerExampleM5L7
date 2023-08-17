@@ -1,0 +1,47 @@
+GetByID - GET
+    http://localhost:8080/personal/select?id=1
+
+
+SelectAll - GET
+    http://localhost:8080/personal/selectAll
+
+
+Insert - POST
+    http://localhost:8080/personal/
+    RequestBody
+    {
+        "name" : "Salam",
+
+        "surname" : "Salam",
+
+        "phone" : "222222",
+
+        "address" : "Baki",
+
+        "status" : 0
+    }
+
+Update - PUT
+    http://localhost:8080/personal/
+    RequestBody
+    {
+        "id" : 15,
+
+        "name" : "Salam11",
+
+        "surname" : "Salamov11",
+
+        "phone" : "000000",
+
+        "address" : "Baki",
+
+        "status" : 2
+    }
+
+
+Delete - DELETE
+    http://localhost:8080/personal/delete
+    RequestBody
+    {
+        "id" : 14
+    }
